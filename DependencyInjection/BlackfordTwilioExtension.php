@@ -16,13 +16,9 @@ use Symfony\Component\Config\FileLocator;
  */
 class BlackfordTwilioExtension extends Extension
 {
-    /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(array(__DIR__.'/../Resources/config')));
+        $loader = new YamlFileLoader($container, new FileLocator([__DIR__.'/../Resources/config']));
         $loader->load('services.yml');
 
         $configuration = new Configuration();

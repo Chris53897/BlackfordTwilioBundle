@@ -1,42 +1,30 @@
-#Symfony Twilio Bundle (for PHP SDK v5)
+#Symfony Twilio Bundle (for PHP SDK v6)
 
 About
 -----
 
-A quick and easy way to use the Twilio SDK (version 5) in a Symfony based application.
+A quick and easy way to use the Twilio SDK (version 6) in a Symfony based application.
 
-Support for PHP 5.6+, including PHP 7 and Symfony 2.8+, including Symfony 3.
+Support for PHP 8+, Symfony >= 4.4.
 
-For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](http://www.twilio.com/).
+For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](https://www.twilio.com/).
 
 Thank you for the awesome work of [Fridolin Koch](http://fkse.io) who created the first version of this bundle, with support for version 4 of the SDK.
 
 Installation
 ------------
 
-Add this to your `composer.json` file:
-
-```json
-"require": {
-	"blackford/twilio-bundle": "~5.0",
-}
+```
+composer req blackford/twilio-bundle
 ```
 
-This will automatically include the `twilio/sdk` dependency into your project.
 
-Add the bundle to `app/AppKernel.php`
-
-```php
-$bundles = array(
-	// ... other bundles
-	new Blackford\TwilioBundle\BlackfordTwilioBundle(),
-);
-```
 
 Configuration
 -------------
 
-Add this to your `config.yml`:
+Add a new file `config/packages/twilio.yml` and copy and adjust the following content:
+Please see [Env-Variables](https://symfony.com/doc/current/configuration/env_var_processors.html) for more Security.
 
 ```yaml
 blackford_twilio:
@@ -52,7 +40,6 @@ blackford_twilio:
     # (Optional) Region to send requests to, defaults to no region selection (typically not required)
     # region: 
 ```
-
 
 Usage
 -----

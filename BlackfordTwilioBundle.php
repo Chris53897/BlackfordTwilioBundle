@@ -1,7 +1,6 @@
 <?php
 namespace Blackford\TwilioBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -14,8 +13,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class BlackfordTwilioBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-    }
 }
