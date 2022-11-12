@@ -21,13 +21,10 @@ class BlackfordTwilioExtension extends Extension
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.php');
 
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $container->getDefinition('twilio.client')
-            ->addArgument($config['username'])
-            ->addArgument($config['password'])
-            ->addArgument($config['accountSid'])
-            ->addArgument($config['region']);
+        foreach ($config as $key => $value) {
+            $container->setParameter('blackford_twilio.'.$key, $value);
+        }
     }
 }

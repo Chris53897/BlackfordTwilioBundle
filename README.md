@@ -21,22 +21,31 @@ composer req blackford/twilio-bundle
 Configuration
 -------------
 
+Add these 2 parameters in `.env.local` and set it to your twilio credentials.
+Please see [Env-Variables](https://symfony.com/doc/current/configuration/env_var_processors.html) for more details.
+
+```yaml
+TWILIO_USER='!changeMe!'
+TWILIO_PASSWORD='!changeMe!'
+```
+
 Add a new file `config/packages/twilio.yml` and copy and adjust the following content:
-Please see [Env-Variables](https://symfony.com/doc/current/configuration/env_var_processors.html) for more Security.
+
 
 ```yaml
 blackford_twilio:
-    # (Required) Username to authenticate with, typically your Account SID from www.twilio.com/user/account
-    username: 'TODO'
+  
+  # (Required) Username to authenticate with, typically your Account SID from www.twilio.com/user/account
+  username: '%env(TWILIO_USER)%'
+
+  # (Required) Password to authenticate with, typically your Auth Token from www.twilio.com/user/account
+  password: '%env(TWILIO_PASSWORD)%'
     
-    # (Required) Password to authenticate with, typically your Auth Token from www.twilio.com/user/account
-    password: 'TODO'
+  # (Optional) Account Sid to authenticate with, defaults to <username> (typically not required)
+  # accountSid: 
     
-    # (Optional) Account Sid to authenticate with, defaults to <username> (typically not required)
-    # accountSid: 
-    
-    # (Optional) Region to send requests to, defaults to no region selection (typically not required)
-    # region: 
+  # (Optional) Region to send requests to, defaults to no region selection (typically not required)
+  # region: 
 ```
 
 Usage
