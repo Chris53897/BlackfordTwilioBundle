@@ -17,14 +17,12 @@ class ConfigurationTest extends TestCase
     {
         $config = new Configuration();
 
-        /** @var ArrayNode $tree */
         $tree = $config->getConfigTreeBuilder()->buildTree();
 
         // Check root name
         $this->assertEquals('twilio', $tree->getName());
 
         // Get child nodes and check them
-        /** @var ScalarNode[] $children  */
         $children = $tree->getChildren();
 
         // Check length

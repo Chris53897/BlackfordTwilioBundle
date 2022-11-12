@@ -3,7 +3,9 @@ CHANGELOG
 
 ## 6.0.0
 
-* Drop support of php 7, Drop support of symfony < 4.4, Upgrade Twilio PHP SDK version v5 => v6
+* Drop support of php 7
+* Drop support of symfony < 4.4
+* Upgrade Twilio PHP SDK version v5 => v6
 
 ## 5.0.0
 

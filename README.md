@@ -1,11 +1,11 @@
-#Symfony Twilio Bundle (for PHP SDK v6)
+# Symfony Twilio Bundle (for PHP SDK v6)
 
 About
 -----
 
 A quick and easy way to use the Twilio SDK (version 6) in a Symfony based application.
 
-Support for PHP 8+, Symfony >= 4.4.
+Support for PHP 8+, Symfony >= 5.4.
 
 For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](https://www.twilio.com/).
 
@@ -17,8 +17,6 @@ Installation
 ```
 composer req blackford/twilio-bundle
 ```
-
-
 
 Configuration
 -------------
@@ -56,18 +54,18 @@ Inside a controller:
 ```php
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Twilio\Rest\Client;
+use Twilio\Rest\Client as TwilioClient;
 
 class TestController extends Controller
 {
+    public function __construct(private TwilioClient $twilioClient)
+    {}
+    
     public function smsAction()
     {
-        /** @var \Twilio\Rest\Client */
-    	$twilio = $this->get('twilio.client');
-        
         $date = date('r');
         
-        $message = $twilio->messages->create(
+        $message = $this->twilioClient->messages->create(
             '+12125551234', // Text any number
             array(
                 'from' => '+14085551234', // From a Twilio number in your account
@@ -86,26 +84,19 @@ Inside a console command:
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Twilio\Rest\Client;
+use Twilio\Rest\Client as TwilioClient;
 
+#[AsCommand(name: 'twilio:test:sms', description: 'Test the Twilio integration by sending a text message.')]
 class TwilioTestCommand extends ContainerAwareCommand
 {
-    protected function configure()
-    {
-        $this
-            ->setName('twilio:test:sms')
-            ->setDescription('Test the Twilio integration by sending a text message.')
-        ;
-    }
-
+    public function __construct(private TwilioClient $twilioClient)
+    {}
+    
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //** @var \Twilio\Rest\Client */
-        $twilio = $this->get('twilio.client');
-         
          $date = date('r');
          
-         $message = $twilio->messages->create(
+         $message = $this->twilioClient->messages->create(
              '+12125551234', // Text any number
              array(
                  'from' => '+14085551234', // From a Twilio number in your account

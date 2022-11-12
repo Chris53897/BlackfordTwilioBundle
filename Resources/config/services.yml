@@ -1,3 +1,0 @@
-services:
-    twilio.client:
-        class: Twilio\Rest\Client

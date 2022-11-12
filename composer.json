@@ -1,7 +1,7 @@
 {
   "name": "blackford/twilio-bundle",
   "type": "symfony-bundle",
-  "description": "Symfony 5+ / PHP 8+ wrapper for the official Twilio SDK v5",
+  "description": "Symfony 5+ / PHP 8+ wrapper for the official Twilio SDK v6",
   "keywords": [
     "Twilio"
   ],
