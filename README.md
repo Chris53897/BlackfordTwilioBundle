@@ -1,25 +1,25 @@
-# Symfony Twilio Bundle (for PHP SDK v6)
+# Symfony Twilio Bundle (for Twilio SDK v6)
 
-About
------
+# About
 
 A quick and easy way to use the Twilio SDK (version 6) in a Symfony based application.
-
 Support for PHP 8+, Symfony >= 5.4.
-
 For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](https://www.twilio.com/).
+
+This bundle is a small wrapper around the official sdk.
+It just adds the basic auth and configs and avoid that you have to configure your service.yaml manual.
+
+If you are already using the [symfony/notifier](https://symfony.com/doc/current/notifier.html) component, habe a look at [twilio-notifier](https://symfony.com/components/Twilio%20Notifier).
 
 Thank you for the awesome work of [Fridolin Koch](http://fkse.io) who created the first version of this bundle, with support for version 4 of the SDK.
 
-Installation
-------------
+# Installation
 
 ```
 composer req blackford/twilio-bundle
 ```
 
-Configuration
--------------
+# Configuration
 
 Add these 2 parameters in `.env.local` and set it to your twilio credentials.
 Please see [Env-Variables](https://symfony.com/doc/current/configuration/env_var_processors.html) for more details.
@@ -30,7 +30,6 @@ TWILIO_PASSWORD='!changeMe!'
 ```
 
 Add a new file `config/packages/twilio.yml` and copy and adjust the following content:
-
 
 ```yaml
 blackford_twilio:
@@ -48,8 +47,9 @@ blackford_twilio:
   # region: 
 ```
 
-Usage
------
+# Usage
+
+[Configure your Twilio-Account](https://www.twilio.com/blog/verifying-twilio-api-requests-php-symfony-5)
 
 Provided services:
 
@@ -58,7 +58,7 @@ Provided services:
 | `twilio.client`     | `\Twilio\Rest\Client`         |
 
 
-Inside a controller:
+## Inside a controller:
 
 ```php
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -87,7 +87,7 @@ class TestController extends Controller
 }
 ```
 
-Inside a console command:
+## Inside a console command:
 
 ```php
 use Symfony\Component\Console\Input\InputInterface;
@@ -118,7 +118,6 @@ class TwilioTestCommand extends ContainerAwareCommand
 }
 ```
 
-Copyright / License
--------------------
+# Copyright / License
 
 See [LICENSE](LICENSE)
