@@ -2,7 +2,7 @@
 namespace Blackford\TwilioBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 
@@ -16,22 +16,15 @@ use Symfony\Component\Config\FileLocator;
  */
 class BlackfordTwilioExtension extends Extension
 {
-    /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(array(__DIR__.'/../Resources/config')));
-        $loader->load('services.yml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.php');
 
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $container->getDefinition('twilio.client')
-            ->addArgument($config['username'])
-            ->addArgument($config['password'])
-            ->addArgument($config['accountSid'])
-            ->addArgument($config['region']);
+        foreach ($config as $key => $value) {
+            $container->setParameter('blackford_twilio.'.$key, $value);
+        }
     }
 }

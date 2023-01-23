@@ -1,61 +1,55 @@
-#Symfony Twilio Bundle (for PHP SDK v5)
+# Symfony Twilio Bundle (for Twilio SDK v6)
 
-About
------
+# About
 
-A quick and easy way to use the Twilio SDK (version 5) in a Symfony based application.
+A quick and easy way to use the Twilio SDK (version 6) in a Symfony based application.
+Support for PHP 8+, Symfony >= 5.4.
+For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](https://www.twilio.com/).
 
-Support for PHP 5.6+, including PHP 7 and Symfony 2.8+, including Symfony 3.
+This bundle is a small wrapper around the official sdk.
+It just adds the basic auth and configs and avoid that you have to configure your service.yaml manual.
 
-For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](http://www.twilio.com/).
+If you are already using the [symfony/notifier](https://symfony.com/doc/current/notifier.html) component, habe a look at [twilio-notifier](https://symfony.com/components/Twilio%20Notifier).
 
 Thank you for the awesome work of [Fridolin Koch](http://fkse.io) who created the first version of this bundle, with support for version 4 of the SDK.
 
-Installation
-------------
+# Installation
 
-Add this to your `composer.json` file:
-
-```json
-"require": {
-	"blackford/twilio-bundle": "~5.0",
-}
+```
+composer req blackford/twilio-bundle
 ```
 
-This will automatically include the `twilio/sdk` dependency into your project.
+# Configuration
 
-Add the bundle to `app/AppKernel.php`
+Add these 2 parameters in `.env.local` and set it to your twilio credentials.
+Please see [Env-Variables](https://symfony.com/doc/current/configuration/env_var_processors.html) for more details.
 
-```php
-$bundles = array(
-	// ... other bundles
-	new Blackford\TwilioBundle\BlackfordTwilioBundle(),
-);
+```yaml
+TWILIO_USER='!changeMe!'
+TWILIO_PASSWORD='!changeMe!'
 ```
 
-Configuration
--------------
-
-Add this to your `config.yml`:
+Add a new file `config/packages/twilio.yml` and copy and adjust the following content:
 
 ```yaml
 blackford_twilio:
-    # (Required) Username to authenticate with, typically your Account SID from www.twilio.com/user/account
-    username: 'TODO'
+  
+  # (Required) Username to authenticate with, typically your Account SID from www.twilio.com/user/account
+  username: '%env(TWILIO_USER)%'
+
+  # (Required) Password to authenticate with, typically your Auth Token from www.twilio.com/user/account
+  password: '%env(TWILIO_PASSWORD)%'
     
-    # (Required) Password to authenticate with, typically your Auth Token from www.twilio.com/user/account
-    password: 'TODO'
+  # (Optional) Account Sid to authenticate with, defaults to <username> (typically not required)
+  # accountSid: 
     
-    # (Optional) Account Sid to authenticate with, defaults to <username> (typically not required)
-    # accountSid: 
-    
-    # (Optional) Region to send requests to, defaults to no region selection (typically not required)
-    # region: 
+  # (Optional) Region to send requests to, defaults to no region selection (typically not required)
+  # region: 
 ```
 
+# Usage
 
-Usage
------
+[Configure your Twilio-Account](https://www.twilio.com/blog/verifying-twilio-api-requests-php-symfony-5)
 
 Provided services:
 
@@ -64,23 +58,23 @@ Provided services:
 | `twilio.client`     | `\Twilio\Rest\Client`         |
 
 
-Inside a controller:
+## Inside a controller:
 
 ```php
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Twilio\Rest\Client;
+use Twilio\Rest\Client as TwilioClient;
 
 class TestController extends Controller
 {
+    public function __construct(private TwilioClient $twilioClient)
+    {}
+    
     public function smsAction()
     {
-        /** @var \Twilio\Rest\Client */
-    	$twilio = $this->get('twilio.client');
-        
         $date = date('r');
         
-        $message = $twilio->messages->create(
+        $message = $this->twilioClient->messages->create(
             '+12125551234', // Text any number
             array(
                 'from' => '+14085551234', // From a Twilio number in your account
@@ -93,32 +87,25 @@ class TestController extends Controller
 }
 ```
 
-Inside a console command:
+## Inside a console command:
 
 ```php
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Twilio\Rest\Client;
+use Twilio\Rest\Client as TwilioClient;
 
+#[AsCommand(name: 'twilio:test:sms', description: 'Test the Twilio integration by sending a text message.')]
 class TwilioTestCommand extends ContainerAwareCommand
 {
-    protected function configure()
-    {
-        $this
-            ->setName('twilio:test:sms')
-            ->setDescription('Test the Twilio integration by sending a text message.')
-        ;
-    }
-
+    public function __construct(private TwilioClient $twilioClient)
+    {}
+    
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        //** @var \Twilio\Rest\Client */
-        $twilio = $this->get('twilio.client');
-         
          $date = date('r');
          
-         $message = $twilio->messages->create(
+         $message = $this->twilioClient->messages->create(
              '+12125551234', // Text any number
              array(
                  'from' => '+14085551234', // From a Twilio number in your account
@@ -131,7 +118,6 @@ class TwilioTestCommand extends ContainerAwareCommand
 }
 ```
 
-Copyright / License
--------------------
+# Copyright / License
 
 See [LICENSE](LICENSE)
