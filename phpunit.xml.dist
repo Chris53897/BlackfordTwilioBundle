@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         backupGlobals="false"
-         backupStaticAttributes="false"
          colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false"
          bootstrap="Tests/bootstrap.php"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd">
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd">
+
   <coverage>
     <include>
       <directory>./</directory>
     </include>
+
     <exclude>
       <directory>./Resources</directory>
       <directory>./Tests</directory>
       <directory>./vendor</directory>
     </exclude>
+
     <report>
       <clover outputFile="build/logs/clover.xml"/>
     </report>
   </coverage>
+
   <logging/>
+
   <testsuites>
     <testsuite name="BlackfordTwilioBundle Test Suite">
       <directory>./Tests</directory>
     </testsuite>
   </testsuites>
+
 </phpunit>
