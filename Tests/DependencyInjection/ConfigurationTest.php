@@ -3,8 +3,6 @@ namespace Blackford\TwilioBundle\Tests\DependencyInjection;
 
 use Blackford\TwilioBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Config\Definition\ArrayNode;
-use Symfony\Component\Config\Definition\ScalarNode;
 
 /**
  * Test the configuration tree

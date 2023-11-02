@@ -1,6 +1,12 @@
 CHANGELOG
 ---------
 
+## 7.0.0
+
+* Drop support of php 8.0
+* Drop support of symfony < 6.3
+* Drop support of Twilio PHP SDK version v6
+
 ## 6.0.0
 
 * Drop support of php 7

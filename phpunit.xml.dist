@@ -2,19 +2,9 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          colors="true"
          bootstrap="Tests/bootstrap.php"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd">
-
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+>
   <coverage>
-    <include>
-      <directory>./</directory>
-    </include>
-
-    <exclude>
-      <directory>./Resources</directory>
-      <directory>./Tests</directory>
-      <directory>./vendor</directory>
-    </exclude>
-
     <report>
       <clover outputFile="build/logs/clover.xml"/>
     </report>
@@ -27,5 +17,16 @@
       <directory>./Tests</directory>
     </testsuite>
   </testsuites>
+
+  <source>
+    <include>
+      <directory>./</directory>
+    </include>
+    <exclude>
+      <directory>./Resources</directory>
+      <directory>./Tests</directory>
+      <directory>./vendor</directory>
+    </exclude>
+  </source>
 
 </phpunit>
