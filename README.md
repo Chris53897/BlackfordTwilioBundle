@@ -1,9 +1,10 @@
-# Symfony Twilio Bundle (for Twilio SDK v6)
+# Symfony Twilio Bundle (for Twilio SDK v6+)
 
 # About
 
-A quick and easy way to use the Twilio SDK (version 6) in a Symfony based application.
-Support for PHP 8+, Symfony >= 5.4.
+A quick and easy way to use the Twilio SDK (version 7) in a Symfony based application.
+Support for PHP 8.1+, Symfony >= 6.3.
+Check older version of this repo, for supporting older Versions of PHP, Symfony, Twilio SDK.
 For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](https://www.twilio.com/).
 
 This bundle is a small wrapper around the official sdk.
