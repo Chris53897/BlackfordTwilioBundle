@@ -3,7 +3,7 @@
 # About
 
 A quick and easy way to use the Twilio SDK (version 7) in a Symfony based application.
-Support for PHP 8.1+, Symfony >= 6.3.
+Support for PHP 8.1+, Symfony >= 6.4.
 Check older version of this repo, for supporting older Versions of PHP, Symfony, Twilio SDK.
 For full documentation about how to use the Twilio Client, see the [official SDK](https://github.com/twilio/twilio-php) provided by [Twilio](https://www.twilio.com/).
 
@@ -16,7 +16,7 @@ Thank you for the awesome work of [Fridolin Koch](http://fkse.io) who created th
 
 # Installation
 
-```
+```bash
 composer req blackford/twilio-bundle
 ```
 

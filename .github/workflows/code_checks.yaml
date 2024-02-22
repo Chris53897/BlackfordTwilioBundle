@@ -11,7 +11,7 @@ jobs:
       matrix:
         php: ['8.1']
         stability: [ prefer-stable ]
-        symfony-version: ['6.3']
+        symfony-version: ['6.4']
         experimental: [false]
         include:
           - php: '8.1'
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.composer/cache/files
           key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
