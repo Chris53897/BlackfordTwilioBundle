@@ -27,6 +27,10 @@ jobs:
             stability: prefer-stable
             symfony-version: '7.0'
             experimental: true
+          - php: '8.4'
+            stability: prefer-stable
+            symfony-version: '7.0'
+            experimental: true
 
     continue-on-error: ${{ matrix.experimental }}
 
